@@ -12,18 +12,18 @@ import javax.ws.rs.core.MediaType;
 import com.example.controller.CalendarDAO;
 import com.example.models.Calendar;
 
-@Path("calendar")
+@Path("/calendar")
 @Produces(MediaType.APPLICATION_JSON)
 public class CalendarService {
 	
 	@GET
-	@Path("all")
+	@Path("/all")
 	public List<Calendar> get() {
 		return CalendarDAO.getAllCalendars();
 	}
 	
 	@PUT
-	@Path("add/{owner}")
+	@Path("/add/{owner}")
 	public void addCalendar(@PathParam("owner") String owner) {
 		CalendarDAO.createCalendar(owner);
 	}
