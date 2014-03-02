@@ -1,5 +1,6 @@
 package com.example.services;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -18,7 +19,7 @@ public class CalendarService {
 	
 	@GET
 	@Path("/all")
-	public List<Calendar> get() {
+	public Collection<Calendar> get() {
 		return CalendarDAO.getAllCalendars();
 	}
 	
