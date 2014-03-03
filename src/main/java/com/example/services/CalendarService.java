@@ -1,8 +1,6 @@
 package com.example.services;
 
 import java.util.Collection;
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -18,13 +16,12 @@ import com.example.models.Calendar;
 public class CalendarService {
 	
 	@GET
-	@Path("/all")
 	public Collection<Calendar> get() {
 		return CalendarDAO.getAllCalendars();
 	}
 	
 	@PUT
-	@Path("/add/{owner}")
+	@Path("/{owner}")
 	public void addCalendar(@PathParam("owner") String owner) {
 		CalendarDAO.createCalendar(owner);
 	}
