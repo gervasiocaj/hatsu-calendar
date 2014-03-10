@@ -26,7 +26,7 @@ public class CalendarService {
 	@Path("/{owner}")
 	public Response addCalendar(@PathParam("owner") String owner) {
 		HatsuCalendar result = CalendarDAO.createCalendar(owner);
-		return Response.status(200).entity("owner: " + result.getOwner()).build();
+		return Response.ok(result).build();
 		
 	}
 }
