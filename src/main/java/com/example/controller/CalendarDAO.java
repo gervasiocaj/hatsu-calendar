@@ -16,7 +16,8 @@ public class CalendarDAO {
 		return calendars.values();
 	}
 
-	public static void createCalendar(String owner) {
-		calendars.put(new Random().nextInt(), new Calendar(owner));
+	public static Calendar createCalendar(String owner) {
+		int cal = new Random().nextInt();
+		return calendars.put(cal, new Calendar(owner));
 	}
 }
