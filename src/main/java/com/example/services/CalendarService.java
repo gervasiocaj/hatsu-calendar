@@ -9,24 +9,24 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.example.controller.CalendarDAO;
-import com.example.models.Calendar;
+import com.example.models.HatsuCalendar;
 
 @Path("/calendar")
 @Produces(MediaType.APPLICATION_JSON)
 public class CalendarService {
 	
 	@GET
-	public Collection<Calendar> get() {
+	public Collection<HatsuCalendar> get() {
 		return CalendarDAO.getAllCalendars();
 	}
 	
 	@PUT
 	@Path("/{owner}")
-	public Calendar addCalendar(@PathParam("owner") String owner) {
-		return CalendarDAO.createCalendar(owner);
+	public Response addCalendar(@PathParam("owner") String owner) {
+		HatsuCalendar result = CalendarDAO.createCalendar(owner);
+		return Response.ok("owner: " + result.getOwner()).build();
 		
 	}
 }
