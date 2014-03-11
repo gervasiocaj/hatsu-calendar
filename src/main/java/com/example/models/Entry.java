@@ -23,6 +23,7 @@ public class Entry {
 		this.location = loc;
 	}
 
+
 	public String getDescription() {
 		return description;
 	}
