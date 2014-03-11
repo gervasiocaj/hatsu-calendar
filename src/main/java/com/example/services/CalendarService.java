@@ -1,7 +1,6 @@
 package com.example.services;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -37,6 +36,7 @@ public class CalendarService {
 	@POST
 	@Path("/{ownerid}/entry")
 	public Response addEvent(
+			@PathParam("ownerid") int ownerid,
 			@QueryParam("desc") String desc, 
 			@QueryParam("start") String start,
 			@QueryParam("end") String end,
@@ -48,7 +48,7 @@ public class CalendarService {
 		if (rep.equalsIgnoreCase("monthly"))
 			repetition = Repetition.MONTHLY;
 		
-		Entry result = CalendarDAO.createEntry(0, new Entry(desc, null, null, repetition, repeats, loc)); 
+		Entry result = CalendarDAO.createEntry(ownerid, new Entry(desc, null, null, repetition, repeats, loc)); 
 		// XXX Fix  start and end to Calendar objs
 		// http://stackoverflow.com/questions/13716338/how-to-pass-calendar-param-as-input-to-a-rest-service
 		
