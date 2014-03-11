@@ -1,6 +1,7 @@
 package com.example.services;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +17,7 @@ import com.example.models.Entry.Repetition;
 public class CalendarService {
 	
 	@GET
-	public Collection<HatsuCalendar> get() {
+	public Map<Integer, HatsuCalendar> get() {
 		return CalendarDAO.getAllCalendars();
 	}
 	

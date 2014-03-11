@@ -9,8 +9,8 @@ public class CalendarDAO {
 	private final static Map<Integer, HatsuCalendar> calendars = new HashMap<Integer, HatsuCalendar>();
 	//private final static Map<Integer, Entry> entry = new HashMap<Integer, Entry>();
 	
-	public static Collection<HatsuCalendar> getAllCalendars() {
-		return calendars.values();
+	public static Map<Integer, HatsuCalendar> getAllCalendars() {
+		return calendars;
 	}
 
 	public static HatsuCalendar createCalendar(String owner) {
