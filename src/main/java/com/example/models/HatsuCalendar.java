@@ -1,7 +1,6 @@
 package com.example.models;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -9,11 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class HatsuCalendar {
 	
 	private String owner;
-	private List<Entry> entries;
+	private Map<Integer, Entry> entries;
 	
 	public HatsuCalendar(String owner) {
 		this.owner = owner;
-		this.entries = new LinkedList<Entry>();
+		this.entries = new HashMap<Integer, Entry>();
 	}
 
 	public String getOwner() {
@@ -21,12 +20,13 @@ public class HatsuCalendar {
 	}
 	
 	public Entry[] getEntries() {
-		return entries.toArray(new Entry[entries.size()]);
+		return entries.values().toArray(new Entry[entries.size()]);
 	}
 	
-	public void addEntry(Entry e) {
-		entries.add(e);
+	public Entry addEntry(int ownerid, Entry e) {
+		if (!entries.containsKey(ownerid))
+			return null;
+		return entries.put(ownerid, e);
 	}
-	
 
 }

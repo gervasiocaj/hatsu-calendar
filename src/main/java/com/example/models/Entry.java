@@ -71,5 +71,6 @@ public class Entry {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
 }
 

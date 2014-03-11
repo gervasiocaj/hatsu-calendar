@@ -1,14 +1,8 @@
 package com.example.services;
 
-import java.util.Calendar;
 import java.util.Collection;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -26,18 +20,40 @@ public class CalendarService {
 		return CalendarDAO.getAllCalendars();
 	}
 	
+	@GET
+	@Path("/{ownerid}")
+	public HatsuCalendar getCalendar(@PathParam("ownerid") int ownerid) {
+		return CalendarDAO.getCalendar(ownerid);
+	}
+	
 	@PUT
 	@Path("/{owner}")
 	public Response addCalendar(@PathParam("owner") String owner) {
 		HatsuCalendar result = CalendarDAO.createCalendar(owner);
 		return Response.ok(result).build();
-		
 	}
 	
 	@POST
-	@Path("/{owner}/entry")
-	public Response addEvent(@PathParam("entry") String desc, Calendar start, Calendar end, Repetition rep, int repeats, String loc) {
-		Entry result = CalendarDAO.createEntry(desc, start, end, rep, repeats, loc);
+	@Path("/{ownerid}/entry")
+	public Response addEvent(
+			@QueryParam("desc") String desc, 
+			@QueryParam("start") String start,
+			@QueryParam("end") String end,
+			@DefaultValue("0")		@QueryParam("repeats") int repeats,
+			@DefaultValue("NONE")	@QueryParam("rep") String rep,
+			@DefaultValue("NONE")	@QueryParam("loc") String loc) {
+		
+		Repetition repetition = Repetition.NONE;
+		if (rep.equalsIgnoreCase("monthly"))
+			repetition = Repetition.MONTHLY;
+		
+		Entry result = CalendarDAO.createEntry(0, new Entry(desc, null, null, repetition, repeats, loc)); 
+		// XXX Fix  start and end to Calendar objs
+		// http://stackoverflow.com/questions/13716338/how-to-pass-calendar-param-as-input-to-a-rest-service
+		
+		if (result == null)
+			return Response.noContent().build();
+		
 		return Response.ok(result).build();
 	}
 	
