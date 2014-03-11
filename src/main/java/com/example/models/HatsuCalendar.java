@@ -23,10 +23,8 @@ public class HatsuCalendar {
 		return entries.values().toArray(new Entry[entries.size()]);
 	}
 	
-	public Entry addEntry(int ownerid, Entry e) {
-		if (!entries.containsKey(ownerid))
-			return null;
-		return entries.put(ownerid, e);
+	public Entry addEntry(Entry e) {
+		return entries.put(new Random().nextInt(), e);
 	}
 
 }

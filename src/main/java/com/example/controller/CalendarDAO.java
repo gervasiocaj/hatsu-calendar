@@ -23,7 +23,7 @@ public class CalendarDAO {
 		if (cal == null)
 			return null;
 		
-		return cal.addEntry(ownerid, e);
+		return cal.addEntry(e);
 	}
 	
 	public static HatsuCalendar getCalendar(int id) {
