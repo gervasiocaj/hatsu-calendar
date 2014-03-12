@@ -59,7 +59,17 @@ public class CalendarService {
 		return Response.ok(result).build();
 	}
 	
-
+	@DELETE
+	@Produces("application/json")
+	@Path("/{ownerid}/event/{eventid}")
+	public Response deleteEvent(
+			@PathParam("ownerid") int ownerId,
+			@PathParam("eventid") int eventId){
+				
+		
+		return Response.status(200).build();
+		
+	}
 	
 	
 }

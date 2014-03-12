@@ -7,7 +7,7 @@ public class Entry {
 	private String description;
 	private Calendar dateStart, dateEnd;
 	private Repetition repetition;
-	private int repeats, id;
+	private int repeats, eventId;
 	private String location;
 	
 	public enum Repetition {
@@ -15,7 +15,7 @@ public class Entry {
 	}
 	
 	public Entry(int id, String desc, Calendar start, Calendar end, Repetition rep, int repeats, String loc) {
-		this.id = id;
+		this.eventId = id;
 		this.description = desc;
 		this.dateStart = start;
 		this.dateEnd = end;
