@@ -68,8 +68,12 @@ public class CalendarService {
 				
 		
 		return Response.status(200).build();
-		
 	}
 	
-	
+	@DELETE
+	@Produces("application/json")
+	@Path("/{ownerid}")
+	public Response deleteCalendar(@PathParam("ownerid") int ownerId){
+		return Response.status(200).build();
+	}
 }
