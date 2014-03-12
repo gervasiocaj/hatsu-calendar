@@ -37,6 +37,7 @@ public class CalendarService {
 	@Path("/{ownerid}/entry")
 	public Response addEvent(
 			@PathParam("ownerid") int ownerid,
+			@QueryParam("id") int id,
 			@QueryParam("desc") String desc, 
 			@QueryParam("start") String start,
 			@QueryParam("end") String end,
@@ -48,7 +49,7 @@ public class CalendarService {
 		if (rep.equalsIgnoreCase("monthly"))
 			repetition = Repetition.MONTHLY;
 		
-		Entry result = CalendarDAO.createEntry(ownerid, new Entry(desc, null, null, repetition, repeats, loc)); 
+		Entry result = CalendarDAO.createEntry(ownerid, new Entry(id, desc, null, null, repetition, repeats, loc)); 
 		// XXX Fix  start and end to Calendar objs
 		// http://stackoverflow.com/questions/13716338/how-to-pass-calendar-param-as-input-to-a-rest-service
 		
@@ -57,5 +58,8 @@ public class CalendarService {
 		
 		return Response.ok(result).build();
 	}
+	
+
+	
 	
 }

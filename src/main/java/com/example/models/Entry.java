@@ -7,14 +7,15 @@ public class Entry {
 	private String description;
 	private Calendar dateStart, dateEnd;
 	private Repetition repetition;
-	private int repeats;
+	private int repeats, id;
 	private String location;
 	
 	public enum Repetition {
 		NONE, MONTHLY;
 	}
 	
-	public Entry(String desc, Calendar start, Calendar end, Repetition rep, int repeats, String loc) {
+	public Entry(int id, String desc, Calendar start, Calendar end, Repetition rep, int repeats, String loc) {
+		this.id = id;
 		this.description = desc;
 		this.dateStart = start;
 		this.dateEnd = end;
@@ -71,6 +72,7 @@ public class Entry {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
 	
 }
 
