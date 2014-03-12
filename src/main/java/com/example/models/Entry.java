@@ -73,6 +73,12 @@ public class Entry {
 		this.location = location;
 	}
 	
+	public int getEventId(){
+		return eventId;
+	}
 	
+	public void setEventId(int eventId){
+		this.eventId = eventId;
+	}
 }
 
