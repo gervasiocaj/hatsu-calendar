@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class Entry {
 	
 	private String description;
-	private Calendar dateStart, dateEnd;
+	private Calendar dateEnd, dateStart;
 	private Repetition repetition;
 	private int repeats, eventId;
 	private String location;

@@ -30,8 +30,16 @@ public class CalendarDAO {
 		return calendars.get(id);
 	}
 	
+	public static HatsuCalendar removeCalendar(int id) {
+		return calendars.remove(id);
+	}
+	
 	public static Entry[] getEntries(int id) {
 		return calendars.get(id).getEntries();
+	}
+	
+	public static void removeEntry(int owner, int entry) {
+		getCalendar(owner).removeEntry(entry);
 	}
 	
 }

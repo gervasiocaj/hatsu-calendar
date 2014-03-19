@@ -1,5 +1,7 @@
 package com.example.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.ws.rs.*;
@@ -14,6 +16,8 @@ import com.example.models.Entry.Repetition;
 @Path("/calendar")
 @Produces(MediaType.APPLICATION_JSON)
 public class CalendarService {
+	
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
 	// GET 		calendar (all, single), event (all, single) (read)
 	// POST		calendar, event (create)
@@ -61,8 +65,7 @@ public class CalendarService {
 	// ---------- POST
 	
 	@POST
-	@Path("/{owner}")
-	public Response addCalendar(@PathParam("owner") String owner) {
+	public Response addCalendar(@QueryParam("owner") String owner) {
 		HatsuCalendar result = CalendarDAO.createCalendar(owner);
 		return Response.ok(result).build(); // TODO change to response created
 	}
@@ -83,12 +86,23 @@ public class CalendarService {
 		if (rep.equalsIgnoreCase("monthly"))
 			repetition = Repetition.MONTHLY;
 		
-		Entry result = CalendarDAO.createEntry(ownerid, new Entry(id, desc, null, null, repetition, repeats, loc)); 
-		// XXX Fix  start and end to Calendar objs
-		// http://stackoverflow.com/questions/13716338/how-to-pass-calendar-param-as-input-to-a-rest-service
+		Entry result = null;
+		
+		try {
+		Calendar startString = Calendar.getInstance();
+		Calendar endString = Calendar.getInstance();
+		
+			startString.setTime(dateFormat.parse(start));
+			endString.setTime(dateFormat.parse(end));
+			
+			result = CalendarDAO.createEntry(ownerid, new Entry(id, desc, startString, endString, repetition, repeats, loc));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (result == null)
-			return Response.noContent().build();
+			return Response.status(400).build();
 		
 		return Response.ok(result).build();
 	}
@@ -96,21 +110,25 @@ public class CalendarService {
 	// ---------- DELETE
 	
 	@DELETE
-	@Produces("application/json")
 	@Path("/{ownerid}/event/{eventid}")
 	public Response deleteEvent(
 			@PathParam("ownerid") int ownerId,
 			@PathParam("eventid") int eventId){
-				
-		//TODO
+		
+		try {
+			CalendarDAO.removeEntry(ownerId, eventId);
+		} catch (Exception e) {
+			return Response.status(400).build();
+		}
 		return Response.status(200).build();
 	}
 	
 	@DELETE
-	@Produces("application/json")
 	@Path("/{ownerid}")
 	public Response deleteCalendar(@PathParam("ownerid") int ownerId){
-		// TODO
+		if (CalendarDAO.removeCalendar(ownerId) == null)
+			return Response.noContent().build();
+		
 		return Response.status(200).build();
 	}
 }

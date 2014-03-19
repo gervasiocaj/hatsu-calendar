@@ -8,11 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class HatsuCalendar {
 	
 	private String owner;
-	private Map<Integer, Entry> entries;
+	private List<Entry> entries;
 	
 	public HatsuCalendar(String owner) {
 		this.owner = owner;
-		this.entries = new HashMap<Integer, Entry>();
+		this.entries = new LinkedList<Entry>();
 	}
 
 	public String getOwner() {
@@ -20,11 +20,16 @@ public class HatsuCalendar {
 	}
 	
 	public Entry[] getEntries() {
-		return entries.values().toArray(new Entry[entries.size()]);
+		return entries.toArray(new Entry[entries.size()]);
 	}
 	
 	public Entry addEntry(Entry e) {
-		return entries.put(new Random().nextInt(), e);
+		entries.add(e);
+		return e;
+	}
+	
+	public void removeEntry(int entry) {
+		entries.remove(entry);
 	}
 
 }
