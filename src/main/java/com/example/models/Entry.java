@@ -7,15 +7,14 @@ public class Entry {
 	private String description;
 	private Calendar dateEnd, dateStart;
 	private Repetition repetition;
-	private int repeats, eventId;
+	private int repeats;
 	private String location;
 	
 	public enum Repetition {
 		NONE, MONTHLY;
 	}
 	
-	public Entry(int id, String desc, Calendar start, Calendar end, Repetition rep, int repeats, String loc) {
-		this.eventId = id;
+	public Entry(String desc, Calendar start, Calendar end, Repetition rep, int repeats, String loc) {
 		this.description = desc;
 		this.dateStart = start;
 		this.dateEnd = end;
@@ -73,12 +72,5 @@ public class Entry {
 		this.location = location;
 	}
 	
-	public int getEventId(){
-		return eventId;
-	}
-	
-	public void setEventId(int eventId){
-		this.eventId = eventId;
-	}
 }
 

@@ -74,7 +74,6 @@ public class CalendarService {
 	@Path("/{ownerid}/event")
 	public Response addEvent(
 			@PathParam("ownerid") int ownerid,
-			@QueryParam("id") int id,
 			@QueryParam("desc") String desc, 
 			@QueryParam("start") String start,
 			@QueryParam("end") String end,
@@ -95,7 +94,7 @@ public class CalendarService {
 			startString.setTime(dateFormat.parse(start));
 			endString.setTime(dateFormat.parse(end));
 			
-			result = CalendarDAO.createEntry(ownerid, new Entry(id, desc, startString, endString, repetition, repeats, loc));
+			result = CalendarDAO.createEntry(ownerid, new Entry(desc, startString, endString, repetition, repeats, loc));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
