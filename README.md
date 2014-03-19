@@ -7,7 +7,7 @@ Dublin Institute of Technology, 2014, semester two.
 ## Example of instance
 
 http://hatsu-calendar.herokuapp.com/services/calendar
-
+```Javascript
     {
         "-131060131" : {
             "owner":"john",
@@ -23,6 +23,7 @@ http://hatsu-calendar.herokuapp.com/services/calendar
             ]
         }
     }
+```
 
 ## Using the application
 
