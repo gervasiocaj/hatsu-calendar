@@ -15,20 +15,45 @@ import com.example.models.Entry.Repetition;
 @Produces(MediaType.APPLICATION_JSON)
 public class CalendarService {
 	
-	// GET 		calendar (all, single), entry (all, single) (read)
-	// POST		calendar, entry (create)
-	// PUT		calendar, entry (update)
-	// DELETE	calendar, entry (delete)
+	// GET 		calendar (all, single), event (all, single) (read)
+	// POST		calendar, event (create)
+	// PUT		calendar, event (update)
+	// DELETE	calendar, event (delete)
 	
 	@GET
-	public Map<Integer, HatsuCalendar> get() {
-		return CalendarDAO.getAllCalendars();
+	public Response get() {
+		Map<Integer, HatsuCalendar> result = CalendarDAO.getAllCalendars();
+		return Response.ok(result).build();
 	}
 	
 	@GET
 	@Path("/{ownerid}")
-	public HatsuCalendar getCalendar(@PathParam("ownerid") int ownerid) {
-		return CalendarDAO.getCalendar(ownerid);
+	public Response getCalendar(@PathParam("ownerid") int ownerid) {
+		HatsuCalendar result = CalendarDAO.getCalendar(ownerid);
+		return Response.ok(result).build();
+	}
+	
+	@GET
+	@Path("/{ownerid}/event")
+	public Response getEntries(@PathParam("ownerid") int ownerid) {
+		Entry[] result = CalendarDAO.getEntries(ownerid);
+		return Response.ok(result).build();
+	}
+	
+	@GET
+	@Path("/{ownerid}/event/{eventid}")
+	public Response getEvent(
+			@PathParam("ownerid") int ownerid,
+			@PathParam("eventid") int eventid) {
+		
+		Entry result;
+		
+		try {
+			result = CalendarDAO.getEntries(ownerid)[eventid];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return Response.noContent().build();
+		}
+		return Response.ok(result).build();
 	}
 	
 	@PUT
@@ -39,7 +64,7 @@ public class CalendarService {
 	}
 	
 	@POST
-	@Path("/{ownerid}/entry")
+	@Path("/{ownerid}/event")
 	public Response addEvent(
 			@PathParam("ownerid") int ownerid,
 			@QueryParam("id") int id,
@@ -71,7 +96,7 @@ public class CalendarService {
 			@PathParam("ownerid") int ownerId,
 			@PathParam("eventid") int eventId){
 				
-		
+		//TODO
 		return Response.status(200).build();
 	}
 	
@@ -79,6 +104,7 @@ public class CalendarService {
 	@Produces("application/json")
 	@Path("/{ownerid}")
 	public Response deleteCalendar(@PathParam("ownerid") int ownerId){
+		// TODO
 		return Response.status(200).build();
 	}
 }

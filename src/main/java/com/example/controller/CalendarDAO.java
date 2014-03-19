@@ -30,4 +30,8 @@ public class CalendarDAO {
 		return calendars.get(id);
 	}
 	
+	public static Entry[] getEntries(int id) {
+		return calendars.get(id).getEntries();
+	}
+	
 }
