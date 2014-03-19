@@ -10,11 +10,11 @@ http://hatsu-calendar.herokuapp.com/services/calendar
 
     {
         "-131060131" : {
-            "owner":"gervasio",
+            "owner":"john",
             "entries" : [
                 {
                     "location":"NONE",
-                    "description":"'festa duro'",
+                    "description":"meeting with sarah",
                     "dateStart":1321023600000,
                     "dateEnd":1321027200000,
                     "repetition":"NONE",
@@ -34,8 +34,10 @@ There is an instance of the current version running at http://hatsu-calendar.her
     http://hatsu-calendar.herokuapp.com/services/calendar/{id}/event : all events the {id} calendar contains
     http://hatsu-calendar.herokuapp.com/services/calendar/{id}/event/{code} : the {code} event inside {id} calendar
 
-###POST
-    todo
+###POST:
+    http://hatsu-calendar.herokuapp.com/services/calendar?owner=john : create calendar with owner equal to 'john'
+    http://hatsu-calendar.herokuapp.com/services/calendar/{id}/event?desc=meeting with sarah&start=2011-11-11 15:00&end=2011-11-11 16:00 : add event to calendar identified by {id}
+    
 
 
 
