@@ -20,6 +20,8 @@ public class CalendarService {
 	// PUT		calendar, event (update)
 	// DELETE	calendar, event (delete)
 	
+	// ---------- GET
+	
 	@GET
 	public Response get() {
 		Map<Integer, HatsuCalendar> result = CalendarDAO.getAllCalendars();
@@ -56,11 +58,13 @@ public class CalendarService {
 		return Response.ok(result).build();
 	}
 	
-	@PUT
+	// ---------- POST
+	
+	@POST
 	@Path("/{owner}")
 	public Response addCalendar(@PathParam("owner") String owner) {
 		HatsuCalendar result = CalendarDAO.createCalendar(owner);
-		return Response.ok(result).build();
+		return Response.ok(result).build(); // TODO change to response created
 	}
 	
 	@POST
@@ -88,6 +92,8 @@ public class CalendarService {
 		
 		return Response.ok(result).build();
 	}
+	
+	// ---------- DELETE
 	
 	@DELETE
 	@Produces("application/json")
