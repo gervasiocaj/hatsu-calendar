@@ -15,6 +15,11 @@ import com.example.models.Entry.Repetition;
 @Produces(MediaType.APPLICATION_JSON)
 public class CalendarService {
 	
+	// GET 		calendar (all, single), entry (all, single) (read)
+	// POST		calendar, entry (create)
+	// PUT		calendar, entry (update)
+	// DELETE	calendar, entry (delete)
+	
 	@GET
 	public Map<Integer, HatsuCalendar> get() {
 		return CalendarDAO.getAllCalendars();
