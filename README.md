@@ -39,6 +39,8 @@ There is an instance of the current version running at http://hatsu-calendar.her
     http://hatsu-calendar.herokuapp.com/services/calendar?owner=john : create calendar with owner equal to 'john'
     http://hatsu-calendar.herokuapp.com/services/calendar/{id}/event?desc=meeting with sarah&start=2011-11-11 15:00&end=2011-11-11 16:00 : add event to calendar identified by {id}
     
-
+###DELETE:
+    http://hatsu-calendar.herokuapp.com/services/calendar/{id}/event/{position} : will remove the entry at the specified {position} on the calendar defined by {id}
+    http://hatsu-calendar.herokuapp.com/services/calendar/{id} : remove the calendar with this {id}
 
 
