@@ -2,7 +2,7 @@
 
 This is an implementation for a RESTful calendar API using JAX-RS. The objects are stored in the memory, and lost when the program is stopped. This is part of the Cloud Computing module assignment, and the group is formed by
     Gervasio Costa, D13123897 and Stephen Hanley, C08364275.
-Dublin Institute of Technology, 2014, semester two.
+Dublin Institute of Technology, 2013, second semester.
 
 ## Example of instance
 
